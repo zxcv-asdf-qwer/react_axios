@@ -1,10 +1,5 @@
-import {
-    createBrowserRouter,
-    RouterProvider,
-    LoaderFunction,
-    ActionFunction,
-} from "react-router-dom";
-import Navigation from "./components/Navigation.tsx";
+import {ActionFunction, createBrowserRouter, LoaderFunction, RouterProvider,} from "react-router-dom";
+import Layout from "./components/Layout.tsx";
 
 interface RouteCommon {
     loader?: LoaderFunction;
@@ -12,9 +7,10 @@ interface RouteCommon {
     ErrorBoundary?: React.ComponentType<any>;
 }
 
-interface IRoute extends RouteCommon{
+interface IRoute extends RouteCommon {
     path: string;
     label: string;
+    active?: boolean;
     Element: React.ComponentType<any>;
 }
 
@@ -24,7 +20,7 @@ interface Pages {
     } & RouteCommon
 }
 
-const pages: Pages = import.meta.glob("./pages/**/*.tsx", { eager: true });
+const pages: Pages = import.meta.glob("./pages/**/*.tsx", {eager: true});
 
 const routes: IRoute[] = [];
 for (const path of Object.keys(pages)) {
@@ -47,18 +43,19 @@ for (const path of Object.keys(pages)) {
 }
 
 const router = createBrowserRouter(
-    routes.map(({ Element, ErrorBoundary, ...rest }) => ({
+    routes.map(({Element, ErrorBoundary, ...rest}) => ({
         ...rest,
-        element: <Element />,
-        ...(ErrorBoundary && { errorElement: <ErrorBoundary /> }),
+        element: (<Layout routes={routes}>
+            <Element/>
+        </Layout>),
+        ...(ErrorBoundary && {errorElement: <ErrorBoundary/>}),
     }))
 );
 
 const App = () => {
-    return <>
-        <Navigation routes={routes} />
-        <RouterProvider router={router} />
-    </>
+    return (
+        <RouterProvider router={router}/>
+    );
 };
 
 export default App;
