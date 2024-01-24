@@ -39,8 +39,8 @@ function Navigation({routes}: { routes: Route[] }) {
                 <Navbar.Toggle/>
             </div>
             <Navbar.Collapse>
-                {routes.map(route => (
-                    <Navbar.Link href={route.path} active={route.path === currentPath}>
+                {routes.map((route, index) => (
+                    <Navbar.Link href={route.path} active={route.path === currentPath} key={index}>
                         {route.label}
                     </Navbar.Link>
                 ))}
