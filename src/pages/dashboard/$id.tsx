@@ -1,9 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom'
 
 const DynamicDashboard = () => {
-  const { id } = useParams();
+  const { id } = useParams()
 
-  return <div>Dynamic Dashboard Page, Param: {id}</div>;
-};
+  return <div>Dynamic Dashboard Page, Param: {id}</div>
+}
 
-export default DynamicDashboard;
+export default DynamicDashboard

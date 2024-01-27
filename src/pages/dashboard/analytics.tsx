@@ -1,5 +1,5 @@
 const DashboardAnalytics = () => {
-  return <div>Dashboard Analytics</div>;
-};
+  return <div>Dashboard Analytics</div>
+}
 
-export default DashboardAnalytics;
+export default DashboardAnalytics
