@@ -1,5 +1,5 @@
-import { Avatar, Dropdown, Navbar } from 'flowbite-react'
-import { useLocation } from 'react-router-dom'
+import { Avatar, Button, Dropdown, Navbar } from 'flowbite-react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 interface Route {
   path: string
@@ -9,13 +9,32 @@ interface Route {
 
 function Navigation({ routes }: { routes: Route[] }) {
   const location = useLocation()
+  const navigate = useNavigate() // useNavigate 훅 사용
   const currentPath = location.pathname
+
+  const handleAddUsersClick = () => {
+    navigate('/addUsers') // 페이지 이동
+  }
+
   return (
     <Navbar fluid rounded>
       <Navbar.Brand href="https://flowbite-react.com">
         <img src="/public/assets/favicon.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Flowbite React</span>
       </Navbar.Brand>
+      <Navbar.Collapse>
+        {routes
+          .filter((route) => route.path.includes('/dashboard'))
+          .map((route, index) => (
+            <Navbar.Link href={route.path} active={route.path === currentPath} key={index}>
+              {route.label}
+            </Navbar.Link>
+          ))}
+      </Navbar.Collapse>
+      <div className="flex md:order-2">
+        <Button onClick={handleAddUsersClick}>sign in</Button> {/* 버튼 클릭 시 handleAddUsersClick 호출 */}
+        <Navbar.Toggle />
+      </div>
       <div className="flex md:order-2">
         <Dropdown
           arrowIcon={false}
@@ -36,13 +55,6 @@ function Navigation({ routes }: { routes: Route[] }) {
         </Dropdown>
         <Navbar.Toggle />
       </div>
-      <Navbar.Collapse>
-        {routes.map((route, index) => (
-          <Navbar.Link href={route.path} active={route.path === currentPath} key={index}>
-            {route.label}
-          </Navbar.Link>
-        ))}
-      </Navbar.Collapse>
     </Navbar>
   )
 }
