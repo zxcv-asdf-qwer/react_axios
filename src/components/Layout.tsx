@@ -1,4 +1,5 @@
 import Navigation from './Navigation.tsx'
+import React from 'react'
 
 interface Route {
   path: string
