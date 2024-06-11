@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { MemberRegisterTypes } from '@/types/type.ts'
-import NaverBtn from '@/pages/auth/naver.tsx'
-import GoogleBtn from '@/pages/auth/google.tsx'
 import { useEffect } from 'react'
+import GoogleBtn from '@/pages/auth/google.tsx'
+import NaverBtn from '@/pages/auth/naver.tsx'
 
 const SignIn = () => {
   const navigate = useNavigate() // useNavigate 훅 사용
@@ -27,9 +27,14 @@ const SignIn = () => {
     handleCallback()
   }, [])
   return (
-    <div>
-      <GoogleBtn />
-      <NaverBtn />
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 className="text-2xl font-bold mb-6 text-center">소셜 로그인</h1>
+        <div className="space-y-0.5">
+          <GoogleBtn />
+          <NaverBtn />
+        </div>
+      </div>
     </div>
   )
 }
