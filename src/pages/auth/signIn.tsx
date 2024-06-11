@@ -18,10 +18,9 @@ const SignIn = () => {
   const handleCallback = () => {
     const hashParams = new URLSearchParams(window.location.hash.substring(1))
     const token = hashParams.get('access_token')
-    const queryParams = new URLSearchParams(window.location.search)
-    const provider = queryParams.get('provider') as MemberRegisterTypes
-    if (token) {
-      handleLoginSuccess({ access_token: token }, provider)
+    const storedProvider = localStorage.getItem('provider') as MemberRegisterTypes | null
+    if (token && storedProvider) {
+      handleLoginSuccess({ access_token: token }, storedProvider)
     }
   }
   useEffect(() => {
@@ -29,8 +28,8 @@ const SignIn = () => {
   }, [])
   return (
     <div>
-      <NaverBtn />
       <GoogleBtn />
+      <NaverBtn />
     </div>
   )
 }

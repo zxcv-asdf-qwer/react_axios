@@ -18,7 +18,7 @@ function NaverBtn() {
   const initializeNaverLogin = () => {
     const naverLogin = new naver.LoginWithNaverId({
       clientId: import.meta.env.VITE_NAVER_CLIENT_ID,
-      callbackUrl: import.meta.env.VITE_AUTH_CALLBACK_URL + '?provider=NAVER',
+      callbackUrl: import.meta.env.VITE_AUTH_CALLBACK_URL,
       isPopup: false,
       loginButton: { color: 'green', type: 3, height: 45 },
       callbackHandle: true,
@@ -31,6 +31,7 @@ function NaverBtn() {
   }, [])
 
   const handleNaverLogin = () => {
+    localStorage.setItem('provider', 'NAVER') // localStorage에 provider 저장
     if (naverRef.current) {
       ;(naverRef.current.children[0] as HTMLElement).click()
     }
