@@ -1,5 +1,6 @@
 import { Avatar, Button, Dropdown, Navbar } from 'flowbite-react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 interface Route {
   path: string
@@ -11,9 +12,23 @@ function Navigation({ routes }: { routes: Route[] }) {
   const location = useLocation()
   const navigate = useNavigate() // useNavigate 훅 사용
   const currentPath = location.pathname
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+  const token = localStorage.getItem('access_token') // 또는 다른 저장소에서 토큰을 가져오세요
 
+  useEffect(() => {
+    // access_token이 있는지 확인
+    if (token) {
+      setIsLoggedIn(true)
+    }
+  }, [token])
   const handleSignInClick = () => {
     navigate('/auth/signIn') // 페이지 이동
+  }
+
+  const handleLogoutClick = () => {
+    // 로그아웃 로직을 여기에 추가합니다
+    localStorage.removeItem('access_token') //저장소에서 토큰을 제거
+    setIsLoggedIn(false)
   }
 
   return (
@@ -32,9 +47,14 @@ function Navigation({ routes }: { routes: Route[] }) {
           ))}
       </Navbar.Collapse>
       <div className="flex md:order-2">
-        <Button onClick={handleSignInClick}>sign in</Button> {/* 버튼 클릭 시 handleAddUsersClick 호출 */}
+        {isLoggedIn ? (
+          <Button onClick={handleLogoutClick}>Logout</Button>
+        ) : (
+          <Button onClick={handleSignInClick}>Sign In</Button>
+        )}
         <Navbar.Toggle />
       </div>
+      );
       <div className="flex md:order-2">
         <Dropdown
           arrowIcon={false}
