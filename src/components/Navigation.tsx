@@ -12,8 +12,8 @@ function Navigation({ routes }: { routes: Route[] }) {
   const navigate = useNavigate() // useNavigate 훅 사용
   const currentPath = location.pathname
 
-  const handleAddUsersClick = () => {
-    navigate('/addUsers') // 페이지 이동
+  const handleSignInClick = () => {
+    navigate('/auth/signIn') // 페이지 이동
   }
 
   return (
@@ -32,7 +32,7 @@ function Navigation({ routes }: { routes: Route[] }) {
           ))}
       </Navbar.Collapse>
       <div className="flex md:order-2">
-        <Button onClick={handleAddUsersClick}>sign in</Button> {/* 버튼 클릭 시 handleAddUsersClick 호출 */}
+        <Button onClick={handleSignInClick}>sign in</Button> {/* 버튼 클릭 시 handleAddUsersClick 호출 */}
         <Navbar.Toggle />
       </div>
       <div className="flex md:order-2">
