@@ -5,6 +5,7 @@ import { SocialLoginRequest } from '@/types/socialLoginRequest.ts'
 import { isSocialLoginResponse } from '@/types/socialLoginResponse.ts'
 import { isSocialUserResponse } from '@/types/socialUserResponse.ts'
 import { MemberRegisterTypes } from '@/types/type.ts'
+import { setAuthorizationToken } from '@/libs/axios.ts'
 
 const AuthGoogle = () => {
   const location = useLocation()
@@ -41,6 +42,7 @@ const AuthGoogle = () => {
           if (isSocialLoginResponse(response.data)) {
             localStorage.setItem('access_token', response.data.access_token)
             localStorage.setItem('refresh_token', response.data.refresh_token)
+            setAuthorizationToken(response.data.access_token)
             navigate('/')
           }
         }

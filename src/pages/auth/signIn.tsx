@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { MemberRegisterTypes } from '@/types/type.ts'
 import { useEffect } from 'react'
-import GoogleBtn from '@/pages/auth/google.tsx'
-import NaverBtn from '@/pages/auth/naver.tsx'
+import GoogleBtn from '@/pages/auth/googleBtn.tsx'
+import NaverBtn from '@/pages/auth/naverBtn.tsx'
 
 const SignIn = () => {
   const navigate = useNavigate() // useNavigate 훅 사용

@@ -1,6 +1,7 @@
 import { Avatar, Button, Dropdown, Navbar } from 'flowbite-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { httpGet } from '@/libs/axios.ts'
 
 interface Route {
   path: string
@@ -25,10 +26,23 @@ function Navigation({ routes }: { routes: Route[] }) {
     navigate('/auth/signIn') // 페이지 이동
   }
 
-  const handleLogoutClick = () => {
-    // 로그아웃 로직을 여기에 추가합니다
-    localStorage.removeItem('access_token') //저장소에서 토큰을 제거
-    setIsLoggedIn(false)
+  const handleLogoutClick = async () => {
+    if (token) {
+      try {
+        // 로그아웃 요청을 보냅니다.
+        await httpGet<void>(import.meta.env.VITE_BASE_URL + '/users/logout', {
+          refreshToken: localStorage.getItem('refresh_token'),
+        })
+        console.log('Logout Clicked')
+      } catch (error) {
+        console.error('Logout failed:', error)
+      }
+      localStorage.clear() //저장소에서 토큰을 제거
+      setIsLoggedIn(false)
+    } else {
+      console.error('No id_token found')
+      setIsLoggedIn(false)
+    }
   }
 
   return (
@@ -54,7 +68,6 @@ function Navigation({ routes }: { routes: Route[] }) {
         )}
         <Navbar.Toggle />
       </div>
-      );
       <div className="flex md:order-2">
         <Dropdown
           arrowIcon={false}
