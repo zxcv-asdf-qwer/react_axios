@@ -1,6 +1,6 @@
 import { httpGet, httpPost } from '@/libs/axios'
-import { SocialLoginRequest } from '@/types/socialLoginRequest.ts'
-import { SocialCreateRequest } from '@/types/socialCreateRequest.ts'
+import { SocialLoginRequest } from '@/types/SocialLoginRequest.ts'
+import { SocialCreateRequest } from '@/types/SocialCreateRequest.ts'
 
 class AuthService {
   /**
@@ -24,12 +24,14 @@ class AuthService {
   }
 
   /**
-   * 내정보 가져오기.
+   * 로그아웃.
    *
    * @returns Promise<T>.
    */
-  async findMe<T>() {
-    return httpGet<T>('/users', {})
+  async logout<T>() {
+    return httpGet<T>('/users/logout', {
+      refreshToken: localStorage.getItem('refresh_token'),
+    })
   }
 }
 

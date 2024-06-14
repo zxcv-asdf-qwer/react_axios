@@ -1,8 +1,10 @@
 import { Avatar, Button, Dropdown, Navbar } from 'flowbite-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { httpGet, setAuthorizationToken } from '@/libs/axios.ts'
+import { setAuthorizationToken } from '@/libs/axios.ts'
 import AuthService from '@/apis/AuthService.ts'
+import { MemberResponse } from '@/types/MemberResponse.ts'
+import InfoService from '@/apis/InfoService.ts'
 
 interface Route {
   path: string
@@ -27,11 +29,13 @@ function Navigation({ routes }: { routes: Route[] }) {
        */
       setAuthorizationToken(token)
       getMyInfo()
+    } else {
+      setIsLoggedIn(false)
     }
   }, [token])
 
   const getMyInfo = () => {
-    AuthService.findMe<any>()
+    InfoService.findMe<MemberResponse>()
       .then((response) => {
         if (response.status === 200) {
           setUserNm(response.data.userNm)
@@ -43,27 +47,23 @@ function Navigation({ routes }: { routes: Route[] }) {
       })
   }
 
-  const handleSignInClick = () => {
-    navigate('/auth/signIn') // 페이지 이동
+  const handleLoginClick = () => {
+    navigate('/auth/signIn')
+    localStorage.clear()
   }
 
-  const handleLogoutClick = async () => {
+  const handleLogoutClick = () => {
     if (token) {
-      try {
-        // 로그아웃 요청을 보냅니다.
-        await httpGet<void>(import.meta.env.VITE_BASE_URL + '/users/logout', {
-          refreshToken: localStorage.getItem('refresh_token'),
-        })
-        console.log('Logout Clicked')
-      } catch (error) {
-        console.error('Logout failed:', error)
-      }
+      // 로그아웃 요청을 보냅니다.
+      AuthService.logout<any>().catch((error: { [key: string]: string | number }) => {
+        alert(error.message ?? error)
+      })
       localStorage.clear() //저장소에서 토큰을 제거
-      setIsLoggedIn(false)
     } else {
       console.error('No id_token found')
-      setIsLoggedIn(false)
     }
+    setIsLoggedIn(false)
+    navigate('/')
   }
 
   return (
@@ -95,13 +95,13 @@ function Navigation({ routes }: { routes: Route[] }) {
               <span className="block truncate text-sm font-medium">{email}</span>
             </Dropdown.Header>
             <Dropdown.Item>Dashboard</Dropdown.Item>
-            <Dropdown.Item>Settings</Dropdown.Item>
+            <Dropdown.Item onClick={() => navigate('/profile')}>Settings</Dropdown.Item>
             <Dropdown.Item>Earnings</Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item onClick={handleLogoutClick}>Sign out</Dropdown.Item>
           </Dropdown>
         ) : (
-          <Button onClick={handleSignInClick}>Sign In</Button>
+          <Button onClick={handleLoginClick}>Sign In</Button>
         )}
         <Navbar.Toggle />
       </div>

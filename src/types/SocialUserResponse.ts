@@ -1,4 +1,4 @@
-import { MemberRegisterTypes } from '@/types/type.ts'
+import { MemberRegisterTypes } from '@/types/Type.ts'
 
 export interface SocialUserResponse {
   memberRegisterType: MemberRegisterTypes

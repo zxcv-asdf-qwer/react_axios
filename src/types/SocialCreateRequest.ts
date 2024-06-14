@@ -1,4 +1,4 @@
-import { MemberRegisterTypes, UserTypes } from '@/types/type.ts'
+import { MemberRegisterTypes, UserTypes } from '@/types/Type.ts'
 
 export interface SocialCreateRequest {
   socialId?: string // 소셜 로그인 ID

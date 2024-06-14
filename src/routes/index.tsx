@@ -1,5 +1,5 @@
 import { ActionFunction, createBrowserRouter, LoaderFunction, RouterProvider } from 'react-router-dom'
-import Layout from '../components/Layout.tsx'
+import Layout from '@/components/Layout.tsx'
 
 interface RouteCommon {
   loader?: LoaderFunction

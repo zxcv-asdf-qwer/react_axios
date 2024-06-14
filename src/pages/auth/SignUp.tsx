@@ -1,10 +1,10 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import { SocialUserResponse } from '@/types/socialUserResponse.ts'
+import { SocialUserResponse } from '@/types/SocialUserResponse.ts'
 import React, { useEffect, useState } from 'react'
 import AuthService from '@/apis/AuthService.ts'
-import { SocialCreateRequest } from '@/types/socialCreateRequest.ts'
+import { SocialCreateRequest } from '@/types/SocialCreateRequest.ts'
 
-const AboutPage = () => {
+const SignUp: React.FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -14,6 +14,7 @@ const AboutPage = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
     const socialCreateRequest: SocialCreateRequest = {
+      socialId: email,
       email: email,
       userNm: userNm,
       memberRegisterType: memberRegisterType,
@@ -86,4 +87,4 @@ const AboutPage = () => {
   )
 }
 
-export default AboutPage
+export default SignUp

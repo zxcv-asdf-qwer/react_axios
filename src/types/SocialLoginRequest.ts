@@ -1,4 +1,4 @@
-import { MemberRegisterTypes, OauthTypes } from '@/types/type.ts'
+import { MemberRegisterTypes, OauthTypes } from '@/types/Type.ts'
 
 export interface SocialLoginRequest {
   code?: string

@@ -1,3 +1,6 @@
 export type MemberRegisterTypes = 'GENERAL' | 'KAKAO' | 'NAVER' | 'APPLE' | 'GOOGLE'
 export type OauthTypes = 'TOKEN' | 'AUTH_CODE'
 export type UserTypes = 'SYS_ADMIN' | 'SYS_USER' | 'USER' | 'BLACK'
+export type DeptCodes = 'DEVELOPER' | 'OPERATION'
+export type GenderCodes = 'F' | 'M' | 'N'
+export type UseYn = 'Y' | 'N'

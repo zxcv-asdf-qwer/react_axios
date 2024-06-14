@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom'
-import { MemberRegisterTypes } from '@/types/type.ts'
-import { useEffect, useState } from 'react'
-import GoogleBtn from '@/pages/auth/googleBtn.tsx'
-import NaverBtn from '@/pages/auth/naverBtn.tsx'
-import { SocialLoginRequest } from '@/types/socialLoginRequest.ts'
+import { MemberRegisterTypes } from '@/types/Type.ts'
+import React, { useEffect, useState } from 'react'
+import GoogleBtn from '@/pages/auth/GoogleBtn.tsx'
+import NaverBtn from '@/pages/auth/NaverBtn.tsx'
+import { SocialLoginRequest } from '@/types/SocialLoginRequest.ts'
 import AuthService from '@/apis/AuthService.ts'
-import { isSocialUserResponse } from '@/types/socialUserResponse.ts'
-import { isSocialLoginResponse } from '@/types/socialLoginResponse.ts'
+import { isSocialUserResponse } from '@/types/SocialUserResponse.ts'
+import { isSocialLoginResponse } from '@/types/SocialLoginResponse.ts'
 import { setAuthorizationToken } from '@/libs/axios.ts'
 
-const SignIn = () => {
+const SignIn: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate() // useNavigate 훅 사용
 
@@ -18,6 +18,7 @@ const SignIn = () => {
     const token = hashParams.get('access_token')
     const storedProvider = localStorage.getItem('provider') as MemberRegisterTypes | null
     if (token && storedProvider) {
+      localStorage.setItem('SOCIAL_ACCESS_TOKEN', token)
       doSignIn(token, storedProvider)
     }
   }
