@@ -1,7 +1,8 @@
 import { Avatar, Button, Dropdown, Navbar } from 'flowbite-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { httpGet } from '@/libs/axios.ts'
+import { httpGet, setAuthorizationToken } from '@/libs/axios.ts'
+import AuthService from '@/apis/AuthService.ts'
 
 interface Route {
   path: string
@@ -14,14 +15,34 @@ function Navigation({ routes }: { routes: Route[] }) {
   const navigate = useNavigate() // useNavigate 훅 사용
   const currentPath = location.pathname
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+  const [userNm, setUserNm] = useState('')
+  const [email, setEmail] = useState('')
   const token = localStorage.getItem('access_token') // 또는 다른 저장소에서 토큰을 가져오세요
-
   useEffect(() => {
     // access_token이 있는지 확인
     if (token) {
       setIsLoggedIn(true)
+      /**
+       * 페이지 로드 시 로컬 스토리지에서 토큰을 불러와 설정
+       */
+      setAuthorizationToken(token)
+      getMyInfo()
     }
   }, [token])
+
+  const getMyInfo = () => {
+    AuthService.findMe<any>()
+      .then((response) => {
+        if (response.status === 200) {
+          setUserNm(response.data.userNm)
+          setEmail(response.data.email)
+        }
+      })
+      .catch((error: { [key: string]: string | number }) => {
+        alert(error.message ?? error)
+      })
+  }
+
   const handleSignInClick = () => {
     navigate('/auth/signIn') // 페이지 이동
   }
@@ -70,8 +91,8 @@ function Navigation({ routes }: { routes: Route[] }) {
             }
           >
             <Dropdown.Header>
-              <span className="block text-sm">Bonnie Green</span>
-              <span className="block truncate text-sm font-medium">name@flowbite.com</span>
+              <span className="block text-sm">{userNm}</span>
+              <span className="block truncate text-sm font-medium">{email}</span>
             </Dropdown.Header>
             <Dropdown.Item>Dashboard</Dropdown.Item>
             <Dropdown.Item>Settings</Dropdown.Item>
