@@ -39,10 +39,14 @@ function NaverBtn() {
 
   return (
     <>
-      <NaverIdLogin ref={naverRef} id="naverIdLogin" />
-      <button className="w-full flex justify-center py-2 px-4 border border-transparent" onClick={handleNaverLogin}>
-        <img src={NaverSignIn} alt="네이버 로그인 버튼" className="login-img" />
-      </button>
+      <div className="flex justify-center">
+        <NaverIdLogin ref={naverRef} id="naverIdLogin" />
+      </div>
+      <div className="flex justify-center">
+        <button className="w-full flex justify-center py-2 px-4 border border-transparent" onClick={handleNaverLogin}>
+          <img src={NaverSignIn} alt="네이버 로그인 버튼" className="login-img" />
+        </button>
+      </div>
     </>
   )
 }

@@ -35,7 +35,7 @@ const SignIn: React.FC = () => {
         setIsLoading(false) // 로딩 상태 해제
         if (response.status === 200) {
           if (isSocialUserResponse(response.data)) {
-            navigate('/auth/signUp', { state: response.data })
+            navigate('/auth/userSignUp', { state: response.data })
           }
           if (isSocialLoginResponse(response.data)) {
             localStorage.setItem('access_token', response.data.access_token)
@@ -50,6 +50,10 @@ const SignIn: React.FC = () => {
         alert(error.message ?? error)
       })
   }
+
+  const handleAdminSignUp = () => {
+    navigate('/auth/adminLogin')
+  }
   useEffect(() => {
     handleCallback()
   }, [])
@@ -63,9 +67,17 @@ const SignIn: React.FC = () => {
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
           <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
             <h1 className="text-2xl font-bold mb-6 text-center">소셜 로그인</h1>
-            <div className="space-y-0.5">
+            <div className="space-y-0.1">
               <GoogleBtn />
               <NaverBtn />
+              <div className="flex justify-center">
+                <button
+                  className="w-full flex justify-center py-2 px-4 border border-transparent"
+                  onClick={handleAdminSignUp}
+                >
+                  관리자로 시작하기
+                </button>
+              </div>
             </div>
           </div>
         </div>

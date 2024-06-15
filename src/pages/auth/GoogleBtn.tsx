@@ -13,14 +13,14 @@ function GoogleBtn() {
   }
 
   return (
-    <>
+    <div className="flex justify-center">
       <button
         className="w-full flex justify-center py-2 px-4 border border-transparent"
         onClick={() => initializeGoogleLogin()}
       >
         <img src={GoogleSignIn} alt="구글 로그인 버튼" className="login-img" />
       </button>
-    </>
+    </div>
   )
 }
 

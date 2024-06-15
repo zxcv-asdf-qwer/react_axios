@@ -1,30 +1,22 @@
-import { useLocation, useNavigate } from 'react-router-dom'
-import { SocialUserResponse } from '@/types/SocialUserResponse.ts'
-import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
 import AuthService from '@/apis/AuthService.ts'
-import { SocialCreateRequest } from '@/types/SocialCreateRequest.ts'
+import { setAuthorizationToken } from '@/libs/axios.ts'
 
-const SignUp: React.FC = () => {
-  const location = useLocation()
+const AdminLogin: React.FC = () => {
   const navigate = useNavigate()
+  const [userId, setUserId] = useState('')
+  const [password, setPassword] = useState('')
 
-  const [email, setEmail] = useState('')
-  const [userNm, setUserNm] = useState('')
-  const memberRegisterType = location.state.memberRegisterType
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-    const socialCreateRequest: SocialCreateRequest = {
-      socialId: email,
-      email: email,
-      userNm: userNm,
-      memberRegisterType: memberRegisterType,
-      userType: 'USER',
-    }
-    AuthService.signUpWithSocial<any>(socialCreateRequest)
+
+    AuthService.LoginForAdmin<any>(userId, password)
       .then((response) => {
         if (response.status === 200) {
           localStorage.setItem('access_token', response.data.access_token)
           localStorage.setItem('refresh_token', response.data.refresh_token)
+          setAuthorizationToken(response.data.access_token)
           navigate('/')
         }
       })
@@ -33,44 +25,37 @@ const SignUp: React.FC = () => {
       })
   }
 
-  useEffect(() => {
-    const state = location.state as SocialUserResponse
-    if (state && state.email) {
-      setEmail(state.email)
-    } else {
-      // 오류 처리
-      console.error('No access token found')
-    }
-  }, [])
-
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">회원가입</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">관리자 로그인</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              이메일
-            </label>
+            <div className="mb-2 block">
+              <label htmlFor="userId" className="block text-sm font-medium text-gray-700">
+                아이디
+              </label>
+            </div>
             <input
-              id="email"
-              type="email"
-              value={email}
-              disabled={true}
-              onChange={(e) => setEmail(e.target.value)}
+              id="userId"
+              type="text"
+              onChange={(e) => {
+                setUserId(e.target.value)
+              }}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
               required
             />
           </div>
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-              닉네임
+              비밀번호
             </label>
             <input
-              id="userNm"
-              type="text"
-              value={userNm}
-              onChange={(e) => setUserNm(e.target.value)}
+              id="userPw"
+              type="password"
+              onChange={(e) => {
+                setPassword(e.target.value)
+              }}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
               required
             />
@@ -79,12 +64,11 @@ const SignUp: React.FC = () => {
             type="submit"
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
           >
-            회원가입
+            로그인
           </button>
         </form>
       </div>
     </div>
   )
 }
-
-export default SignUp
+export default AdminLogin

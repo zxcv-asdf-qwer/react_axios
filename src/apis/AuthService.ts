@@ -1,6 +1,7 @@
 import { httpGet, httpPost } from '@/libs/axios'
 import { SocialLoginRequest } from '@/types/SocialLoginRequest.ts'
 import { SocialCreateRequest } from '@/types/SocialCreateRequest.ts'
+import { AdminMemberCreateRequest } from '@/types/AdminMemberCreateRequest.ts'
 
 class AuthService {
   /**
@@ -14,13 +15,32 @@ class AuthService {
   }
 
   /**
-   * 간편 회원가입.
+   * 소셜 회원가입.
    *
-   * @param request 간편 로그인 관련 정보.
+   * @param request 소셜 회원가입 관련 정보.
    * @returns Promise<T>.
    */
   async signUpWithSocial<T>(request: SocialCreateRequest) {
     return httpPost<T>('/pb/social', request)
+  }
+
+  /**
+   * 관리자 회원가입.
+   *
+   * @param request 관리자 회원가입 관련 정보.
+   * @returns Promise<T>.
+   */
+  async signUpForAdmin<T>(request: AdminMemberCreateRequest) {
+    return httpPost<T>('/pb/admin', request)
+  }
+  /**
+   * 관리자 로그인.
+   *
+   * @param request 관리자 로그인 관련 정보.
+   * @returns Promise<T>.
+   */
+  async LoginForAdmin<T>(userId: string, password: string) {
+    return httpPost<T>('/pb/admin-login', { userId: userId, userPw: password })
   }
 
   /**
