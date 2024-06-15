@@ -53,7 +53,7 @@ const SignIn: React.FC = () => {
   }
 
   const handleAdminSignUp = () => {
-    navigate('/auth/adminLogin')
+    navigate('/auth/adminSignIn')
   }
   useEffect(() => {
     handleCallback()
