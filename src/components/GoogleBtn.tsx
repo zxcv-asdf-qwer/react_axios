@@ -1,4 +1,4 @@
-import GoogleSignIn from '../../../public/assets/google_login.png'
+import GoogleSignIn from '../../public/assets/google_login.png'
 
 function GoogleBtn() {
   const initializeGoogleLogin = () => {

@@ -1,4 +1,4 @@
-import NaverSignIn from '../../../public/assets/naver_login.png'
+import NaverSignIn from '../../public/assets/naver_login.png'
 import styled from 'styled-components'
 import { useEffect, useRef } from 'react'
 

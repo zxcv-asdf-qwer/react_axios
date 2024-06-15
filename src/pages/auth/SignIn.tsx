@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { MemberRegisterTypes } from '@/types/Type.ts'
 import React, { useEffect, useState } from 'react'
-import GoogleBtn from '@/pages/auth/GoogleBtn.tsx'
-import NaverBtn from '@/pages/auth/NaverBtn.tsx'
+import GoogleBtn from '@/components/GoogleBtn.tsx'
+import NaverBtn from '@/components/NaverBtn.tsx'
 import { SocialLoginRequest } from '@/types/SocialLoginRequest.ts'
 import AuthService from '@/apis/AuthService.ts'
 import { isSocialUserResponse } from '@/types/SocialUserResponse.ts'
@@ -38,6 +38,7 @@ const SignIn: React.FC = () => {
             navigate('/auth/userSignUp', { state: response.data })
           }
           if (isSocialLoginResponse(response.data)) {
+            localStorage.setItem('USER_TYPE', 'USER')
             localStorage.setItem('access_token', response.data.access_token)
             localStorage.setItem('refresh_token', response.data.refresh_token)
             setAuthorizationToken(response.data.access_token)

@@ -1,7 +1,6 @@
 import { Avatar, Button, Dropdown, Navbar } from 'flowbite-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { setAuthorizationToken } from '@/libs/axios.ts'
 import AuthService from '@/apis/AuthService.ts'
 import { MemberResponse } from '@/types/MemberResponse.ts'
 import InfoService from '@/apis/InfoService.ts'
@@ -24,10 +23,6 @@ function Navigation({ routes }: { routes: Route[] }) {
     // access_token이 있는지 확인
     if (token) {
       setIsLoggedIn(true)
-      /**
-       * 페이지 로드 시 로컬 스토리지에서 토큰을 불러와 설정
-       */
-      setAuthorizationToken(token)
       getMyInfo()
     } else {
       setIsLoggedIn(false)
@@ -68,9 +63,9 @@ function Navigation({ routes }: { routes: Route[] }) {
 
   return (
     <Navbar fluid rounded>
-      <Navbar.Brand href="https://flowbite-react.com">
+      <Navbar.Brand href="#">
         <img src="/public/assets/favicon.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Flowbite React</span>
+        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">ColdBrew React</span>
       </Navbar.Brand>
       <Navbar.Collapse>
         {routes

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import AuthService from '@/apis/AuthService.ts'
 import { setAuthorizationToken } from '@/libs/axios.ts'
 
-const AdminLogin: React.FC = () => {
+const AdminSignIn: React.FC = () => {
   const navigate = useNavigate()
   const [userId, setUserId] = useState('')
   const [password, setPassword] = useState('')
@@ -14,6 +14,7 @@ const AdminLogin: React.FC = () => {
     AuthService.LoginForAdmin<any>(userId, password)
       .then((response) => {
         if (response.status === 200) {
+          localStorage.setItem('USER_TYPE', 'ADMIN')
           localStorage.setItem('access_token', response.data.access_token)
           localStorage.setItem('refresh_token', response.data.refresh_token)
           setAuthorizationToken(response.data.access_token)
@@ -71,4 +72,4 @@ const AdminLogin: React.FC = () => {
     </div>
   )
 }
-export default AdminLogin
+export default AdminSignIn
