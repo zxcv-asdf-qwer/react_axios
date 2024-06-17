@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from 'react-icons/hi'
 import { Sidebar } from 'flowbite-react'
 import AuthService from '@/apis/AuthService.ts'
 
@@ -38,7 +37,9 @@ function Sidebaro({ routes }: { routes: Route[] }) {
       }
     }
   }
-
+  const handleAdminSignUp = () => {
+    navigate('/auth/adminSignUp')
+  }
   return (
     <Sidebar aria-label="Sidebar with logo branding example">
       <Sidebar.Logo href="#" img="/public/assets/favicon.svg" imgAlt="Flowbite logo">
@@ -46,27 +47,11 @@ function Sidebaro({ routes }: { routes: Route[] }) {
       </Sidebar.Logo>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
-          <Sidebar.Item href="#" icon={HiChartPie}>
-            Dashboard
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiViewBoards}>
-            Kanban
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiInbox}>
-            Inbox
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiUser}>
-            Users
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiShoppingBag}>
-            Products
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiArrowSmRight} onClick={handleLogoutClick}>
-            Sign out
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiTable}>
-            Sign Up
-          </Sidebar.Item>
+          {routes.map((route, index) => (
+            <Sidebar.Item href={route.path} key={index}>
+              {route.label}
+            </Sidebar.Item>
+          ))}
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>

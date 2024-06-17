@@ -52,7 +52,7 @@ const SignIn: React.FC = () => {
       })
   }
 
-  const handleAdminSignUp = () => {
+  const handleAdminSignIn = () => {
     navigate('/auth/adminSignIn')
   }
   useEffect(() => {
@@ -74,7 +74,7 @@ const SignIn: React.FC = () => {
               <div className="flex justify-center">
                 <button
                   className="w-full flex justify-center py-2 px-4 border border-transparent"
-                  onClick={handleAdminSignUp}
+                  onClick={handleAdminSignIn}
                 >
                   관리자로 시작하기
                 </button>
