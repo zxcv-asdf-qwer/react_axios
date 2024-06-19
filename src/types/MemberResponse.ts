@@ -18,3 +18,7 @@ export interface MemberResponse {
   marketingAppPush: boolean // 앱 푸시알림 수신동의
   groupKeys: Set<GroupDto> // 그룹 정보
 }
+export type MemberListResponse = {
+  data: MemberResponse[]
+  totalCount: number
+}

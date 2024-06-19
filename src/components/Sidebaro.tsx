@@ -47,11 +47,16 @@ function Sidebaro({ routes }: { routes: Route[] }) {
       </Sidebar.Logo>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
-          {routes.map((route, index) => (
-            <Sidebar.Item href={route.path} key={index}>
-              {route.label}
-            </Sidebar.Item>
-          ))}
+          {routes
+            .filter((route) => route.path.includes('/admin'))
+            .map((route, index) => (
+              <Sidebar.Item href={route.path} key={index}>
+                {route.label}
+              </Sidebar.Item>
+            ))}
+          <Sidebar.Item href="#" onClick={handleLogoutClick}>
+            Sign out
+          </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>
