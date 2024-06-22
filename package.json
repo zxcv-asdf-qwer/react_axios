@@ -43,5 +43,6 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
     "vite": "^5.0.8"
-  }
+  },
+  "homepage":"https://melodic-platypus-b57ff8.netlify.app/"
 }
