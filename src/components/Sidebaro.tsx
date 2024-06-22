@@ -37,9 +37,7 @@ function Sidebaro({ routes }: { routes: Route[] }) {
       }
     }
   }
-  const handleAdminSignUp = () => {
-    navigate('/auth/adminSignUp')
-  }
+
   return (
     <Sidebar aria-label="Sidebar with logo branding example">
       <Sidebar.Logo href="#" img="/public/assets/favicon.svg" imgAlt="Flowbite logo">

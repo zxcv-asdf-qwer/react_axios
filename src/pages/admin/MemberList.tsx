@@ -7,7 +7,7 @@ import { MemberListResponse, MemberResponse } from '@/types/MemberResponse.ts'
 function MemberList() {
   const [members, setMembers] = useState<MemberResponse[]>([])
   const [page, setPage] = useState(0)
-  const [size, setSize] = useState(10)
+  const [size] = useState(10)
   const [totalCount, setTotalCount] = useState(0)
 
   useEffect(() => {
@@ -48,8 +48,6 @@ function MemberList() {
             <tr key={member.memberId}>
               <td className="px-6 py-4 whitespace-nowrap">{member.userNm}</td>
               <td className="px-6 py-4 whitespace-nowrap">{member.email}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{member.deptCode.desc}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{member.groups.map((group) => group.groupNm).join(', ')}</td>
             </tr>
           ))}
         </tbody>
