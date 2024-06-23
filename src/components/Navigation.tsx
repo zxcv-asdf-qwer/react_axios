@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import AuthService from '@/apis/AuthService.ts'
 import { MemberResponse } from '@/types/MemberResponse.ts'
 import InfoService from '@/apis/InfoService.ts'
-
+import FaviconImage from '@/assets/favicon.svg'
 interface Route {
   path: string
   label: string
@@ -64,7 +64,7 @@ function Navigation({ routes }: { routes: Route[] }) {
   return (
     <Navbar fluid rounded>
       <Navbar.Brand href="#">
-        <img src="@/assets/favicon.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
+        <img src={FaviconImage} className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">ColdBrew React</span>
       </Navbar.Brand>
       <Navbar.Collapse>

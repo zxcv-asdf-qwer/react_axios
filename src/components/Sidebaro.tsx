@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Sidebar } from 'flowbite-react'
 import AuthService from '@/apis/AuthService.ts'
+import FaviconImage from '@/assets/favicon.svg'
 
 interface Route {
   path: string
@@ -40,7 +41,7 @@ function Sidebaro({ routes }: { routes: Route[] }) {
 
   return (
     <Sidebar aria-label="Sidebar with logo branding example">
-      <Sidebar.Logo href="#" img="@/assets/favicon.svg" imgAlt="Flowbite logo">
+      <Sidebar.Logo href="#" img={FaviconImage} imgAlt="Flowbite logo">
         ColdBrew
       </Sidebar.Logo>
       <Sidebar.Items>
