@@ -16,7 +16,7 @@ export interface MemberResponse {
   address2: string // 주소
   introduce: string // 자기소개
   marketingAppPush: boolean // 앱 푸시알림 수신동의
-  groupKeys: Set<GroupDto> // 그룹 정보
+  groups: Set<GroupDto> // 그룹 정보
 }
 export type MemberListResponse = {
   data: MemberResponse[]

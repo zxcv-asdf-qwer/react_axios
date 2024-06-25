@@ -33,7 +33,7 @@ const Profile: React.FC = () => {
   }
   const handleSave = () => {
     // memberUpdateRequest 객체가 존재하고, groupKeys가 존재하는 경우 할당
-    editedProfile!.groupKeys = profile?.groupKeys ?? new Set<GroupDto>()
+    editedProfile!.groupKeys = profile?.groups ?? new Set<GroupDto>()
     InfoService.updateMyInfo<any>(editedProfile!) // 프로필 수정 API 요청
       .then((response) => {
         if (response.status === 200) {

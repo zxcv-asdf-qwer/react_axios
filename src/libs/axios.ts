@@ -69,9 +69,9 @@ async function refreshAuthToken(): Promise<string> {
   // 갱신된 토큰을 반환하는 로직을 구현합니다.
   // 예를 들어, refresh token을 사용해 새로운 access token을 받아올 수 있습니다.
   const response = await axios.post('/auth/refresh-token', {
-    /* refresh token payload */
+    refreshToken: localStorage.getItem("refresh_token")
   })
-  return response.data.accessToken
+  return response.data.data.accessToken
 }
 /**
  * Access token 헤더 설정.
@@ -84,6 +84,27 @@ function setAuthorizationToken(token?: string) {
   } else {
     delete API.defaults.headers.common.Authorization
   }
+}
+
+/**
+ * API GET 통신.
+ *
+ * @param urlPath API url.
+ * @param params GET 타입의 인수들.
+ * @param responseType 원하는 응답 데이터(JSON 혹은 Blob).
+ * @param withCredentials For session.
+ * @returns Promise<T>.
+ */
+async function httpGetList<T>(
+  urlPath: string,
+  params?: { [key: string]: unknown },
+  responseType?: ResponseType,
+): Promise<ApiResponse<T>> {
+  const res = await API.get(urlPath, {
+    params,
+    responseType,
+  })
+  return { status: res.status, data: res.data }
 }
 
 /**
@@ -171,4 +192,4 @@ async function httpDelete<T>(
   return { status: res.status, data: res.data.data }
 }
 
-export { setAuthorizationToken, httpGet, httpPost, httpPut, httpDelete }
+export { setAuthorizationToken, httpGet, httpPost, httpPut, httpDelete, httpGetList }

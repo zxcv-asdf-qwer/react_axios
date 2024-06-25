@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, {useLayoutEffect} from 'react'
 import Navigation from '@/components/Navigation.tsx'
 import Sidebaro from '@/components/Sidebaro.tsx'
-import { setAuthorizationToken } from '@/libs/axios.ts'
+import {setAuthorizationToken} from '@/libs/axios.ts'
 
 interface Route {
   path: string
@@ -14,10 +14,10 @@ interface LayoutProps {
   routes: Route[]
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, routes }) => {
+const Layout: React.FC<LayoutProps> = ({children, routes}) => {
   const userType = localStorage.getItem('USER_TYPE') // 또는 다른 저장소에서 토큰을 가져오세요
   const token = localStorage.getItem('access_token')
-  useEffect(() => {
+  useLayoutEffect(() => {
     // access_token이 있는지 확인
     if (token) {
       /**
@@ -30,12 +30,12 @@ const Layout: React.FC<LayoutProps> = ({ children, routes }) => {
     <>
       {token && userType === 'ADMIN' ? (
         <div className="flex">
-          <Sidebaro routes={routes} />
+          <Sidebaro routes={routes}/>
           <div className="flex-1 p-4">{children}</div>
         </div>
       ) : (
         <div>
-          <Navigation routes={routes} />
+          <Navigation routes={routes}/>
           <div>{children}</div>
         </div>
       )}

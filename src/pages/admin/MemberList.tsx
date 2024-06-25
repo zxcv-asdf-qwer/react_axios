@@ -1,4 +1,3 @@
-// src/components/MemberList.tsx
 import { useEffect, useState } from 'react'
 import Pagination from '@/components/Pagination.tsx'
 import MemberManagerService from '@/apis/MemberManagerService.ts'
@@ -30,6 +29,9 @@ function MemberList() {
         <thead>
           <tr>
             <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              UserId
+            </th>
+            <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Name
             </th>
             <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -46,8 +48,11 @@ function MemberList() {
         <tbody className="bg-white divide-y divide-gray-200">
           {members.map((member) => (
             <tr key={member.memberId}>
+              <td className="px-6 py-4 whitespace-nowrap">{member.userId}</td>
               <td className="px-6 py-4 whitespace-nowrap">{member.userNm}</td>
               <td className="px-6 py-4 whitespace-nowrap">{member.email}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{member.deptCode}</td>
+              <td className="px-6 py-4 whitespace-nowrap"> {Array.from(member.groups)[0]?.groupNm || 'No Group'}</td>
             </tr>
           ))}
         </tbody>
