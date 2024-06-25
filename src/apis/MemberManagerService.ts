@@ -1,4 +1,4 @@
-import { httpGet } from '@/libs/axios'
+import {httpGetList} from '@/libs/axios'
 
 class MemberManagerService {
   /**
@@ -7,7 +7,7 @@ class MemberManagerService {
    * @returns Promise<T>.
    */
   async getMemberList<T>(page: number, size: number) {
-    return httpGet<T>('/admin/members', { page: page, size: size })
+    return httpGetList<T>('/admin/members', { page: page, size: size })
   }
 }
 
