@@ -3,7 +3,7 @@ const AboutPage = () => {
     <div>
       <h1>소개</h1>
       <a
-        href="/dashboard/analytics"
+        href="/dashboard/index"
         className="decoration-600 dark:decoration-500 inline font-medium text-cyan-600 underline decoration-solid underline-offset-2 hover:no-underline dark:text-cyan-500"
       >
         Flowbite Library
