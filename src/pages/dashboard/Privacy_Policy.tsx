@@ -19,7 +19,7 @@ const PrivacyPolicy: React.FC = () => {
         <li>법적 근거: 개인정보 보호법 제15조 제1항 제4호(‘계약 이행’)</li>
         <li>수집・이용 항목: ID, 비밀번호</li>
       </ul>
-      <h2 className="text-2xl font-semibold mt-6 mb-2">개인정보의 파기 절차 및 방법</h2>
+      <h2 className="text-2xl font-semibold mt-6 mb-2">3. 개인정보의 파기 절차 및 방법</h2>
       <p className="mb-4">
         ① compigs은(는) 개인정보 보유기간의 경과, 처리목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체없이 해당 개인정보를 파기합니다.
       </p>
@@ -40,11 +40,11 @@ const PrivacyPolicy: React.FC = () => {
       <p className="mb-4">
         compigs은(는) 전자적 파일 형태로 기록・저장된 개인정보는 기록을 재생할 수 없도록 파기하며, 종이 문서에 기록・저장된 개인정보는 분쇄기로 분쇄하거나 소각하여 파기합니다.
       </p>
-      <h2 className="text-2xl font-semibold mt-6 mb-2">개인정보의 제3자 제공</h2>
+      <h2 className="text-2xl font-semibold mt-6 mb-2">4. 개인정보의 제3자 제공</h2>
       <p className="mb-4">
         ① compigs은(는) 정보주체의 개인정보를 개인정보의 처리 목적에서 명시한 범위 내에서만 처리하며, 정보주체의 동의, 법률의 특별한 규정 등 「개인정보 보호법」 제17조 및 제18조에 해당하는 경우에만 개인정보를 제3자에게 제공하고 그 이외에는 정보주체의 개인정보를 제3자에게 제공하지 않습니다.
       </p>
-      <h2 className="text-2xl font-semibold mt-6 mb-2">개인정보의 안전성 확보조치</h2>
+      <h2 className="text-2xl font-semibold mt-6 mb-2">5. 개인정보의 안전성 확보조치</h2>
       <p className="mb-4">
         ① compigs은(는) 개인정보의 안전성 확보를 위해 다음과 같은 조치를 취하고 있습니다.
       </p>
