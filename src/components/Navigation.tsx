@@ -63,7 +63,7 @@ function Navigation({ routes }: { routes: Route[] }) {
 
   return (
     <Navbar fluid rounded>
-      <Navbar.Brand href="#">
+      <Navbar.Brand href="/">
         <img src={FaviconImage} className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">ColdBrew React</span>
       </Navbar.Brand>
@@ -72,7 +72,7 @@ function Navigation({ routes }: { routes: Route[] }) {
           .filter((route) => route.path.includes('/dashboard'))
           .map((route, index) => (
             <Navbar.Link href={route.path} active={route.path === currentPath} key={index}>
-              {route.label}
+              {route.path.includes('/privacy_policy') ? '개인정보처리방침' : route.label}
             </Navbar.Link>
           ))}
       </Navbar.Collapse>
