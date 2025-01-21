@@ -17,7 +17,7 @@ function Sidebaro({ routes }: { routes: Route[] }) {
   const handleLogoutClick = () => {
     if (token) {
       // 로그아웃 요청을 보냅니다.
-      AuthService.logout<any>()
+      AuthService.signOut()
         .then(() => {
           localStorage.clear() //저장소에서 토큰을 제거
           if (location.pathname === '/') {

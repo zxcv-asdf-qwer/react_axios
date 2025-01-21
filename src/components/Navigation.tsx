@@ -50,7 +50,7 @@ function Navigation({ routes }: { routes: Route[] }) {
   const handleLogoutClick = () => {
     if (token) {
       // 로그아웃 요청을 보냅니다.
-      AuthService.logout<any>().catch((error: { [key: string]: string | number }) => {
+      AuthService.signOut().catch((error: { [key: string]: string | number }) => {
         alert(error.message ?? error)
       })
       localStorage.clear() //저장소에서 토큰을 제거

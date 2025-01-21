@@ -91,6 +91,16 @@ class AuthService {
   }
 
   /**
+   * supabase 로그아웃.
+   *
+   * @param request 관리자 로그인 관련 정보.
+   * @returns Promise<T>.
+   */
+  async signOut() {
+    return await supabase.auth.signOut()
+  }
+
+  /**
    * 로그아웃.
    *
    * @returns Promise<T>.
