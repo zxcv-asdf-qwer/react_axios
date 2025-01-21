@@ -1,14 +1,15 @@
 import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 import AuthService from '@/apis/AuthService.ts'
-import { AdminMemberCreateRequest } from '@/types/AdminMemberCreateRequest.ts'
+import { AdminMemberCreateRequest2 } from '@/types/AdminMemberCreateRequest2.ts'
 import { DeptCodes } from '@/types/Type.ts'
+
 
 const deptOptions: DeptCodes[] = ['DEVELOPER', 'OPERATION']
 
 const AdminSignUp: React.FC = () => {
   const navigate = useNavigate()
-  const [editedForm, setEditedForm] = useState<AdminMemberCreateRequest>({})
+  const [editedForm, setEditedForm] = useState<AdminMemberCreateRequest2>({})
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     if (editedForm) {
       setEditedForm({
@@ -20,16 +21,18 @@ const AdminSignUp: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-    AuthService.signUpForAdmin<any>(editedForm!)
+    AuthService.signUp(editedForm!)
       .then((response) => {
-        if (response.status === 200) {
+        if (response.user) {
           navigate('/')
         }
       })
       .catch((error: { [key: string]: string | number }) => {
-        alert(error.message ?? error)
+        alert(error.message ?? '관리자 회원가입 실패:' + error.message)
       })
   }
+
+ 
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -38,7 +41,7 @@ const AdminSignUp: React.FC = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="userId" className="block text-sm font-medium text-gray-700">
-              아이디
+              아이디2
             </label>
             <input
               id="userId"

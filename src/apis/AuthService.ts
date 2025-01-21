@@ -2,6 +2,13 @@ import { httpGet, httpPost } from '@/libs/axios'
 import { SocialLoginRequest } from '@/types/SocialLoginRequest.ts'
 import { SocialCreateRequest } from '@/types/SocialCreateRequest.ts'
 import { AdminMemberCreateRequest } from '@/types/AdminMemberCreateRequest.ts'
+import { SupabaseClient, createClient } from '@supabase/supabase-js';
+import { AdminMemberCreateRequest2 } from '@/types/AdminMemberCreateRequest2';
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY as string;
+
+export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey);
 
 class AuthService {
   /**
@@ -33,6 +40,28 @@ class AuthService {
   async signUpForAdmin<T>(request: AdminMemberCreateRequest) {
     return httpPost<T>('/pb/admin', request)
   }
+
+   /**
+   * supabase 회원가입.
+   *
+   * @param request supabase 회원가입 관련 정보.
+   * @returns Promise<T>.
+   */
+  async signUp(request: AdminMemberCreateRequest2): Promise<{ user: any; error: any }> {
+    const { data, error } = await supabase.auth.signUp({
+      email: request.email,
+      password: request.userPw,
+    })
+
+    if (error) {
+      console.error('회원가입 오류:', error.message)
+      
+    }
+  
+    return { user: data.user, error: null }
+  }
+ 
+
   /**
    * 관리자 로그인.
    *
