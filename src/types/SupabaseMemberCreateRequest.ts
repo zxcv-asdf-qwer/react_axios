@@ -1,4 +1,4 @@
-export interface AdminMemberCreateRequest2 {
+export interface SupabaseMemberCreateRequest {
   userNm?: string // 사용자 명
   userId?: string // 사용자 아이디
   email: string // 이메일

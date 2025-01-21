@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
-import AuthService from '@/apis/AuthService.ts'
+// import AuthService from '@/apis/AuthService.ts'
 import { setAuthorizationToken } from '@/libs/axios.ts'
+import SupabaseAuthService from '@/apis/SupabaseAuthService'
 
 const AdminSignIn: React.FC = () => {
   const navigate = useNavigate()
@@ -11,7 +12,7 @@ const AdminSignIn: React.FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
 
-    AuthService.signInWithEmail(userId, password)
+    SupabaseAuthService.signInWithEmail(userId, password)
       .then((response) => {
         if (response.data?.session) {
           localStorage.setItem('USER_TYPE', 'ADMIN')

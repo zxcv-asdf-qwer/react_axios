@@ -1,10 +1,11 @@
 import { Avatar, Button, Dropdown, Navbar } from 'flowbite-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import AuthService from '@/apis/AuthService.ts'
+// import AuthService from '@/apis/AuthService.ts'
 import { MemberResponse } from '@/types/MemberResponse.ts'
 import InfoService from '@/apis/InfoService.ts'
 import FaviconImage from '@/assets/favicon.svg'
+import SupabaseAuthService from '@/apis/SupabaseAuthService'
 interface Route {
   path: string
   label: string
@@ -50,7 +51,7 @@ function Navigation({ routes }: { routes: Route[] }) {
   const handleLogoutClick = () => {
     if (token) {
       // 로그아웃 요청을 보냅니다.
-      AuthService.signOut().catch((error: { [key: string]: string | number }) => {
+      SupabaseAuthService.signOut().catch((error: { [key: string]: string | number }) => {
         alert(error.message ?? error)
       })
       localStorage.clear() //저장소에서 토큰을 제거

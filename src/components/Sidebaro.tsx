@@ -1,7 +1,8 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Sidebar } from 'flowbite-react'
-import AuthService from '@/apis/AuthService.ts'
+// import AuthService from '@/apis/AuthService.ts'
 import FaviconImage from '@/assets/favicon.svg'
+import SupabaseAuthService from '@/apis/SupabaseAuthService'
 
 interface Route {
   path: string
@@ -17,7 +18,7 @@ function Sidebaro({ routes }: { routes: Route[] }) {
   const handleLogoutClick = () => {
     if (token) {
       // 로그아웃 요청을 보냅니다.
-      AuthService.signOut()
+      SupabaseAuthService.signOut()
         .then(() => {
           localStorage.clear() //저장소에서 토큰을 제거
           if (location.pathname === '/') {

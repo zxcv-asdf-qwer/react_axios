@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
-import AuthService from '@/apis/AuthService.ts'
-import { AdminMemberCreateRequest2 } from '@/types/AdminMemberCreateRequest2.ts'
+// import AuthService from '@/apis/AuthService.ts'
+import SupabaseAuthService from '@/apis/SupabaseAuthService.ts'
+import { SupabaseMemberCreateRequest } from '@/types/SupabaseMemberCreateRequest'
 import { DeptCodes } from '@/types/Type.ts'
 
 
@@ -9,7 +10,7 @@ const deptOptions: DeptCodes[] = ['DEVELOPER', 'OPERATION']
 
 const AdminSignUp: React.FC = () => {
   const navigate = useNavigate()
-  const [editedForm, setEditedForm] = useState<AdminMemberCreateRequest2>({
+  const [editedForm, setEditedForm] = useState<SupabaseMemberCreateRequest>({
     email: '',
     userPw: ''
   })
@@ -25,7 +26,7 @@ const AdminSignUp: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-    AuthService.signUp(editedForm!)
+    SupabaseAuthService.signUp(editedForm!)
       .then((response) => {
         if (response.user) {
           navigate('/')
