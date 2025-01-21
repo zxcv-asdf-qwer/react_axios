@@ -9,7 +9,11 @@ const deptOptions: DeptCodes[] = ['DEVELOPER', 'OPERATION']
 
 const AdminSignUp: React.FC = () => {
   const navigate = useNavigate()
-  const [editedForm, setEditedForm] = useState<AdminMemberCreateRequest2>({})
+  const [editedForm, setEditedForm] = useState<AdminMemberCreateRequest2>({
+    email: '',
+    userPw: ''
+  })
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     if (editedForm) {
       setEditedForm({
@@ -32,21 +36,19 @@ const AdminSignUp: React.FC = () => {
       })
   }
 
- 
-
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">회원가입</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="userId" className="block text-sm font-medium text-gray-700">
-              아이디2
+        <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              이메일
             </label>
             <input
-              id="userId"
-              name="userId"
-              type="text"
+              id="email"
+              name="email"
+              type="email"
               onChange={handleInputChange}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
               required
@@ -73,19 +75,6 @@ const AdminSignUp: React.FC = () => {
               id="userNm"
               name="userNm"
               type="text"
-              onChange={handleInputChange}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              이메일
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
               onChange={handleInputChange}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"
               required

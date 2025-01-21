@@ -41,26 +41,25 @@ class AuthService {
     return httpPost<T>('/pb/admin', request)
   }
 
-   /**
-   * supabase 회원가입.
-   *
-   * @param request supabase 회원가입 관련 정보.
-   * @returns Promise<T>.
-   */
+  /**
+  * supabase 회원가입.
+  *
+  * @param request supabase 회원가입 관련 정보.
+  * @returns Promise<T>.
+  */
   async signUp(request: AdminMemberCreateRequest2): Promise<{ user: any; error: any }> {
     const { data, error } = await supabase.auth.signUp({
       email: request.email,
       password: request.userPw,
     })
 
-    if (error) {
-      console.error('회원가입 오류:', error.message)
-      
+    if (data) {
+      return { user: data.user, error: null }
     }
-  
-    return { user: data.user, error: null }
+
+    return { user: null, error: error }
   }
- 
+
 
   /**
    * 관리자 로그인.
@@ -70,6 +69,25 @@ class AuthService {
    */
   async LoginForAdmin<T>(userId: string, password: string) {
     return httpPost<T>('/pb/admin-login', { userId: userId, userPw: password })
+  }
+
+  /**
+   * supabase 로그인.
+   *
+   * @param request 관리자 로그인 관련 정보.
+   * @returns Promise<T>.
+   */
+  async signInWithEmail(email: string, password: string) {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      })
+
+      if (data) {
+        return { data: data, error: null }
+      }
+
+      return { data: null, error: error }
   }
 
   /**

@@ -11,13 +11,13 @@ const AdminSignIn: React.FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
 
-    AuthService.LoginForAdmin<any>(userId, password)
+    AuthService.signInWithEmail(userId, password)
       .then((response) => {
-        if (response.status === 200) {
+        if (response.data?.session) {
           localStorage.setItem('USER_TYPE', 'ADMIN')
-          localStorage.setItem('access_token', response.data.access_token)
-          localStorage.setItem('refresh_token', response.data.refresh_token)
-          setAuthorizationToken(response.data.access_token)
+          localStorage.setItem('access_token', response.data?.session.access_token)
+          localStorage.setItem('refresh_token', response.data?.session.refresh_token)
+          setAuthorizationToken(response.data?.session.access_token)
           navigate('/')
         }
       })
