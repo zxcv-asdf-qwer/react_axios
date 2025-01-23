@@ -14,6 +14,7 @@ function MemberList() {
     SupabaseAuthService.getUserInfo<MemberListResponse2>(page, size)
       .then((response) => {
         if (response.data) {
+          console.log(response.data)
           setMembers(response.data)
           setTotalCount(response.totalCount)
         }
@@ -42,7 +43,7 @@ function MemberList() {
               Image Url
             </th>
             <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Groups
+              Providers
             </th>
           </tr>
         </thead>
@@ -53,6 +54,11 @@ function MemberList() {
               <td className="px-6 py-4 whitespace-nowrap">{member.email}</td>
               <td className="px-6 py-4 whitespace-nowrap">{member.user_name}</td>
               <td className="px-6 py-4 whitespace-nowrap">{member.image_url}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{member.providers.map((provider, index) => (
+                <span key={index} className="mr-1 px-2 py-1 bg-gray-200 rounded-full text-sm">
+                  {provider}
+                </span>
+              ))}</td>
               {/* <td className="px-6 py-4 whitespace-nowrap"> {Array.from(member.groups)[0]?.groupNm || 'No Group'}</td> */}
             </tr>
           ))}
