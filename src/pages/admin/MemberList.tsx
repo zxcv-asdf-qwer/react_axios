@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react'
 import Pagination from '@/components/Pagination.tsx'
-import MemberManagerService from '@/apis/MemberManagerService.ts'
-import { MemberListResponse, MemberResponse } from '@/types/MemberResponse.ts'
+// import MemberManagerService from '@/apis/MemberManagerService.ts'
+import { MemberListResponse2, UserInfo } from '@/types/UserInfo.ts'
+import SupabaseAuthService from '@/apis/SupabaseAuthService'
 
 function MemberList() {
-  const [members, setMembers] = useState<MemberResponse[]>([])
+  const [members, setMembers] = useState<UserInfo[]>([])
   const [page, setPage] = useState(0)
   const [size] = useState(10)
   const [totalCount, setTotalCount] = useState(0)
 
   useEffect(() => {
-    MemberManagerService.getMemberList<MemberListResponse>(page, size)
+    SupabaseAuthService.getUserInfo<MemberListResponse2>(page, size)
       .then((response) => {
-        if (response.status === 200) {
-          setMembers(response.data.data)
-          setTotalCount(response.data.totalCount)
+        if (response.data) {
+          setMembers(response.data)
+          setTotalCount(response.totalCount)
         }
       })
       .catch((error: { [key: string]: string | number }) => {
@@ -29,16 +30,16 @@ function MemberList() {
         <thead>
           <tr>
             <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              UserId
-            </th>
-            <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Name
+              UUId
             </th>
             <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Email
             </th>
             <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Department
+              User Name
+            </th>
+            <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Image Url
             </th>
             <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Groups
@@ -47,12 +48,12 @@ function MemberList() {
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {members.map((member) => (
-            <tr key={member.memberId}>
-              <td className="px-6 py-4 whitespace-nowrap">{member.userId}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{member.userNm}</td>
+            <tr key={member.id}>
+              <td className="px-6 py-4 whitespace-nowrap">{member.id}</td>
               <td className="px-6 py-4 whitespace-nowrap">{member.email}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{member.deptCode}</td>
-              <td className="px-6 py-4 whitespace-nowrap"> {Array.from(member.groups)[0]?.groupNm || 'No Group'}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{member.user_name}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{member.image_url}</td>
+              {/* <td className="px-6 py-4 whitespace-nowrap"> {Array.from(member.groups)[0]?.groupNm || 'No Group'}</td> */}
             </tr>
           ))}
         </tbody>
