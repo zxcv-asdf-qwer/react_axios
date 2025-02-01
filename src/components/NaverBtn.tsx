@@ -33,7 +33,7 @@ function NaverBtn() {
   const handleNaverLogin = () => {
     localStorage.setItem('provider', 'NAVER') // localStorage에 provider 저장
     if (naverRef.current) {
-      ;(naverRef.current.children[0] as HTMLElement).click()
+      (naverRef.current.children[0] as HTMLElement).click()
     }
   }
 

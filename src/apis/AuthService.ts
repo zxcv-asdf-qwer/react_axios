@@ -2,12 +2,12 @@ import { httpGet, httpPost } from '@/libs/axios'
 import { SocialLoginRequest } from '@/types/SocialLoginRequest.ts'
 import { SocialCreateRequest } from '@/types/SocialCreateRequest.ts'
 import { AdminMemberCreateRequest } from '@/types/AdminMemberCreateRequest.ts'
-import { SupabaseClient, createClient } from '@supabase/supabase-js';
+import { SupabaseClient, createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY as string;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY as string
 
-export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey);
+export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey)
 
 class AuthService {
   /**

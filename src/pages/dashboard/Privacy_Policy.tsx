@@ -53,7 +53,7 @@ const PrivacyPolicy: React.FC = () => {
         <li>물리적 조치: 자료보관실 등의 접근통제</li>
       </ul>
     </div>
-  );
+  )
 }
 
 export default PrivacyPolicy

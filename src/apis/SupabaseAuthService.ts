@@ -1,12 +1,12 @@
-import { SupabaseClient, createClient } from '@supabase/supabase-js';
-import { SupabaseMemberCreateRequest } from '@/types/SupabaseMemberCreateRequest';
+import { SupabaseClient, createClient } from '@supabase/supabase-js'
+import { SupabaseMemberCreateRequest } from '@/types/SupabaseMemberCreateRequest'
 import { UserInfo } from '@/types/UserInfo';
-import { SocialLoginRequest } from '@/types/SocialLoginRequest';
+import { SocialLoginRequest } from '@/types/SocialLoginRequest'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY as string;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY as string
 
-export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey);
+export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey)
 
 class SupabaseAuthService {
   /**
@@ -70,8 +70,8 @@ class SupabaseAuthService {
   * @returns Promise<T>.
   */
   async getUserInfo(page: number, size: number) {
-    const start = page * size;
-    const end = start + size - 1;
+    const start = page * size
+    const end = start + size - 1
 
     const { data, count, error } = await supabase
       .from('userinfo')
@@ -87,7 +87,6 @@ class SupabaseAuthService {
       totalCount: count || 0
     }
   }
-
 
   /**
   * supabase 소셜 로그인.

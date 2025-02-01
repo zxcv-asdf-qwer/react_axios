@@ -1,30 +1,30 @@
 // MemberlistPop.tsx
-import React, { useState, useEffect } from 'react';
-import { UserInfo } from '@/types/UserInfo.ts';
+import React, { useState, useEffect } from 'react'
+import { UserInfo } from '@/types/UserInfo.ts'
 
 interface MemberlistPopProps {
-  member: UserInfo | null;
-  onSave: (member: UserInfo) => void;
-  onClose: () => void;
+  member: UserInfo | null
+  onSave: (member: UserInfo) => void
+  onClose: () => void
 }
 
 const MemberlistPop: React.FC<MemberlistPopProps> = ({ member, onSave, onClose }) => {
-  const [formData, setFormData] = useState<UserInfo>({} as UserInfo);
+  const [formData, setFormData] = useState<UserInfo>({} as UserInfo)
   useEffect(() => {
     if (member) {
-      setFormData(member);
+      setFormData(member)
     }
   }, [member]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSave(formData);
-  };
+    e.preventDefault()
+    onSave(formData)
+  }
 
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
@@ -87,7 +87,7 @@ const MemberlistPop: React.FC<MemberlistPopProps> = ({ member, onSave, onClose }
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MemberlistPop;
+export default MemberlistPop

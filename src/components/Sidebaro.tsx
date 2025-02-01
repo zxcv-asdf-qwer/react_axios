@@ -42,8 +42,8 @@ function Sidebaro({ routes }: { routes: Route[] }) {
 
   return (
     <Sidebar aria-label="Sidebar with logo branding example">
-      <Sidebar.Logo href="#" img={FaviconImage} imgAlt="Flowbite logo">
-        ColdBrew
+      <Sidebar.Logo href="/" img={FaviconImage} imgAlt="Flowbite logo">
+        ColdBrew Admin
       </Sidebar.Logo>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
