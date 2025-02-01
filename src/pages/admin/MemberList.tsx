@@ -3,7 +3,7 @@ import Pagination from '@/components/Pagination.tsx'
 // import MemberManagerService from '@/apis/MemberManagerService.ts'
 import { UserInfo } from '@/types/UserInfo.ts'
 import SupabaseAuthService from '@/apis/SupabaseAuthService'
-import MemberlistPop from './MemberListPop'
+import MemberListPop from '@/pages/admin/MemberListPop.tsx'
 
 function MemberList() {
   const [members, setMembers] = useState<UserInfo[]>([])
@@ -105,7 +105,7 @@ function MemberList() {
         onPageChange={(newPage) => setPage(newPage)}
       />
       {isFormOpen && (
-        <MemberlistPop
+        <MemberListPop
           member={selectedMember}
           onSave={handleSaveMember}
           onClose={() => setIsFormOpen(false)}
