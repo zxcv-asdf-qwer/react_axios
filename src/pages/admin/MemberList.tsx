@@ -3,14 +3,21 @@ import Pagination from '@/components/Pagination.tsx'
 // import MemberManagerService from '@/apis/MemberManagerService.ts'
 import { MemberListResponse2, UserInfo } from '@/types/UserInfo.ts'
 import SupabaseAuthService from '@/apis/SupabaseAuthService'
+import MemberlistPop from './MemberListPop'
 
 function MemberList() {
   const [members, setMembers] = useState<UserInfo[]>([])
   const [page, setPage] = useState(0)
   const [size] = useState(10)
   const [totalCount, setTotalCount] = useState(0)
+  const [isFormOpen, setIsFormOpen] = useState(false)
+  const [selectedMember, setSelectedMember] = useState<UserInfo | null>(null)
 
   useEffect(() => {
+    fetchMembers()
+  }, [page, size])
+
+  const fetchMembers = () => {
     SupabaseAuthService.getUserInfo<MemberListResponse2>(page, size)
       .then((response) => {
         if (response.data) {
@@ -22,11 +29,38 @@ function MemberList() {
       .catch((error: { [key: string]: string | number }) => {
         alert(error.message ?? error)
       })
-  }, [page, size])
+
+  }
+
+  const handleAddMember = () => {
+    setSelectedMember(null)
+    setIsFormOpen(true)
+  }
+
+  const handleEditMember = (member: UserInfo) => {
+    setSelectedMember(member)
+    setIsFormOpen(true)
+  }
+
+  const handleSaveMember = (member: UserInfo) => {
+    if (member.id) {
+      setMembers(members.map(m => m.id === member.id ? member : m))
+    } else {
+      setMembers([...members, { ...member, id: Date.now().toString() }])
+    }
+    setIsFormOpen(false)
+    fetchMembers()
+  }
 
   return (
     <div>
       <h1 className="text-2xl mb-4">Member List</h1>
+      <button
+        onClick={handleAddMember}
+        className="mb-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Add New Member
+      </button>
       <table className="min-w-full divide-y divide-gray-200">
         <thead>
           <tr>
@@ -49,7 +83,7 @@ function MemberList() {
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {members.map((member) => (
-            <tr key={member.id}>
+            <tr key={member.id} onClick={() => handleEditMember(member)}>
               <td className="px-6 py-4 whitespace-nowrap">{member.id}</td>
               <td className="px-6 py-4 whitespace-nowrap">{member.email}</td>
               <td className="px-6 py-4 whitespace-nowrap">{member.user_name}</td>
@@ -70,6 +104,13 @@ function MemberList() {
         currentPage={page}
         onPageChange={(newPage) => setPage(newPage)}
       />
+      {isFormOpen && (
+        <MemberlistPop
+          member={selectedMember}
+          onSave={handleSaveMember}
+          onClose={() => setIsFormOpen(false)}
+        />
+      )}
     </div>
   )
 }

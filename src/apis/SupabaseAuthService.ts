@@ -19,6 +19,12 @@ class SupabaseAuthService {
     const { data, error } = await supabase.auth.signUp({
       email: request.email,
       password: request.userPw,
+      options: {
+        data: {
+          user_name: request.userNm,
+          image_url: request.imageUrl
+        }
+      }
     })
 
     if (data) {
@@ -86,7 +92,7 @@ class SupabaseAuthService {
   /**
   * supabase 소셜 로그인.
   *
-  * @param request supabase 회원조회 관련 정보.
+  * @param request supabase 소셜 로그인.
   * @returns Promise<T>.
   */
   async signInWithSocial<T>(request: SocialLoginRequest) {

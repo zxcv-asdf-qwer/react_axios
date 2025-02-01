@@ -1,15 +1,7 @@
 import { useNavigate } from 'react-router-dom'
-import { MemberRegisterTypes } from '@/types/Type.ts'
 import React, { useEffect, useState } from 'react'
 import GoogleBtn from '@/components/GoogleBtn.tsx'
 import NaverBtn from '@/components/NaverBtn.tsx'
-import { SocialLoginRequest } from '@/types/SocialLoginRequest.ts'
-import AuthService from '@/apis/AuthService.ts'
-import { isSocialUserResponse } from '@/types/SocialUserResponse.ts'
-import { isSocialLoginResponse } from '@/types/SocialLoginResponse.ts'
-import { setAuthorizationToken } from '@/libs/axios.ts'
-import SupabaseAuthService from '@/apis/SupabaseAuthService'
-import { Provider } from '@supabase/supabase-js'
 
 const SignIn: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -18,41 +10,6 @@ const SignIn: React.FC = () => {
   const handleCallback = () => {
     const hashParams = new URLSearchParams(window.location.hash.substring(1))
     const token = hashParams.get('access_token')
-    const storedProvider = localStorage.getItem('provider') as Provider | null
-    if (token && storedProvider) {
-      localStorage.setItem('SOCIAL_ACCESS_TOKEN', token)
-      doSignIn(token, storedProvider)
-    }
-  }
-  function doSignIn(token: string, provider: Provider) {
-    setIsLoading(true)
-
-    const socialLoginRequest: SocialLoginRequest = {
-      token: token,
-      provider: provider,
-      oauthType: 'TOKEN',
-    }
-    SupabaseAuthService.signInWithSocial<any>(socialLoginRequest)
-      .then((response) => {
-        console.log(response)
-        setIsLoading(false) // 로딩 상태 해제
-        if (response) {
-          // if (isSocialUserResponse(response.data)) {
-          //   navigate('/auth/userSignUp', { state: response.data })
-          // }
-          // if (isSocialLoginResponse(response.data)) {
-          //   localStorage.setItem('USER_TYPE', 'USER')
-          //   localStorage.setItem('access_token', response.data.access_token)
-          //   localStorage.setItem('refresh_token', response.data.refresh_token)
-          //   setAuthorizationToken(response.data.access_token)
-          //   navigate('/')
-          // }
-        }
-      })
-      .catch((error: { [key: string]: string | number }) => {
-        setIsLoading(false) // 로딩 상태 해제
-        alert(error.message ?? error)
-      })
   }
 
   const handleAdminSignIn = () => {

@@ -12,7 +12,9 @@ const AdminSignUp: React.FC = () => {
   const navigate = useNavigate()
   const [editedForm, setEditedForm] = useState<SupabaseMemberCreateRequest>({
     email: '',
-    userPw: ''
+    userPw: '',
+    userNm: '',
+    imageUrl: ''
   })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
