@@ -1,6 +1,3 @@
-import { DeptCodes, GenderCodes, MemberRegisterTypes, UserTypes, UseYn } from '@/types/Type.ts'
-import { GroupDto } from '@/types/GroupDto.ts'
-
 export interface MemberResponse2 {
   id: string // keycloak ID
   email: string // user ID

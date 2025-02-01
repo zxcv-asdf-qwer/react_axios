@@ -4,12 +4,10 @@ import GoogleBtn from '@/components/GoogleBtn.tsx'
 import NaverBtn from '@/components/NaverBtn.tsx'
 
 const SignIn: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading] = useState(false)
   const navigate = useNavigate() // useNavigate 훅 사용
 
   const handleCallback = () => {
-    const hashParams = new URLSearchParams(window.location.hash.substring(1))
-    const token = hashParams.get('access_token')
   }
 
   const handleAdminSignIn = () => {

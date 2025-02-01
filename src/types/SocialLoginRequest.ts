@@ -1,4 +1,4 @@
-import { MemberRegisterTypes, OauthTypes } from '@/types/Type.ts'
+import { OauthTypes } from '@/types/Type.ts'
 import { Provider } from '@supabase/supabase-js'
 
 export interface SocialLoginRequest {

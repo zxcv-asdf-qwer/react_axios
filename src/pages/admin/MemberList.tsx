@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Pagination from '@/components/Pagination.tsx'
 // import MemberManagerService from '@/apis/MemberManagerService.ts'
-import { MemberListResponse2, UserInfo } from '@/types/UserInfo.ts'
+import { UserInfo } from '@/types/UserInfo.ts'
 import SupabaseAuthService from '@/apis/SupabaseAuthService'
 import MemberlistPop from './MemberListPop'
 
@@ -18,7 +18,7 @@ function MemberList() {
   }, [page, size])
 
   const fetchMembers = () => {
-    SupabaseAuthService.getUserInfo<MemberListResponse2>(page, size)
+    SupabaseAuthService.getUserInfo(page, size)
       .then((response) => {
         if (response.data) {
           console.log(response.data)

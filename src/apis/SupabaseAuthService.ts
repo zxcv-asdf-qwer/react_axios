@@ -69,7 +69,7 @@ class SupabaseAuthService {
   * @param request supabase 회원조회 관련 정보.
   * @returns Promise<T>.
   */
-  async getUserInfo<T>(page: number, size: number) {
+  async getUserInfo(page: number, size: number) {
     const start = page * size;
     const end = start + size - 1;
 
@@ -95,7 +95,7 @@ class SupabaseAuthService {
   * @param request supabase 소셜 로그인.
   * @returns Promise<T>.
   */
-  async signInWithSocial<T>(request: SocialLoginRequest) {
+  async signInWithSocial(request: SocialLoginRequest) {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: request.provider,
       options: {
